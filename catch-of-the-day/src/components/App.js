@@ -18,6 +18,12 @@ class App extends React.Component {
     this.setState({ fishes }); // Ponemos ese nuevo estado en el State
   };
 
+  addToOrder = (key) => {
+    const order = {...this.state.order};
+    order[key] = order[key] + 1 || 1;
+    this.setState({ order });
+  }
+
   loadSampleFishes = () => {
     this.setState({ fishes: sampleFishes });
   }
@@ -28,7 +34,13 @@ class App extends React.Component {
         <div className="menu">
           <Header tagline="Fresh Seafood Market" /> {/* Esta prop la va a tomar despues el componente Header */}
           <ul className="fishes">
-            {Object.keys(this.state.fishes).map(key => <Fish key={key} details={this.state.fishes[key]} />)}
+            {Object.keys(this.state.fishes).map(key => 
+              <Fish 
+                key={key} 
+                details={this.state.fishes[key]} 
+                addToOrder={this.addToOrder} 
+                index={key}
+                />)}
           </ul>
         </div>
         <Order />
