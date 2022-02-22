@@ -1,22 +1,24 @@
-import React  from  "react";
+import React from "react";
 
-class AddFishFOrm extends React.Component {
+class AddFishForm extends React.Component {
   nameRef = React.createRef();
   priceRef = React.createRef();
   statusRef = React.createRef();
   descRef = React.createRef();
   imageRef = React.createRef();
 
-  createFish = (event) => {
+  createFish = event => {
     event.preventDefault();
     const fish = {
-      name: this.nameRef.value.value,
-      price: parseFloat(this.priceRefnameRef.value.value),
-      status: this.statusRefnameRef.value.value,
-      desc: this.descRefnameRef.value.value,
-      image: this.imageRefnameRef.value.value,
-    }
-  }
+      name: this.nameRef.current.value,
+      price: parseFloat(this.priceRef.current.value),
+      status: this.statusRef.current.value,
+      desc: this.descRef.current.value,
+      image: this.imageRef.current.value,
+    };
+    this.props.addFish(fish);
+    event.currentTarget.reset(); // Resetea el form cuando se envia
+  };
 
   render() {
     return (
@@ -35,4 +37,4 @@ class AddFishFOrm extends React.Component {
   }
 }
 
-export default AddFishFOrm;
+export default AddFishForm;
